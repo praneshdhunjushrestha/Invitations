@@ -71,7 +71,7 @@
             border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 50%;
             pointer-events: none;
-            z-index: 20;
+            z-index: 25;
             mix-blend-mode: difference;
             transform: translate(-50%, -50%) scale(0.5);
             opacity: 0;
@@ -105,63 +105,67 @@
     <!-- Main Content -->
     <div class="flex flex-col md:flex-row w-full h-full max-h-screen overflow-hidden">
         
-        <!-- Information Section -->
-        <div class="w-full h-[48%] md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-center px-6 md:px-16 lg:px-20 bg-white z-30 border-r border-gray-50 overflow-hidden">
-            <div class="max-w-md mx-auto md:mx-0 py-4 md:py-10 animate-fade-up flex flex-col h-full justify-center">
+        <!-- Information Section (Reduced Height on Mobile) -->
+        <div class="w-full h-[35%] md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-center px-6 md:px-16 lg:px-20 bg-white z-30 md:border-r md:border-gray-50 overflow-hidden relative">
+            <div class="max-w-md mx-auto md:mx-0 py-2 md:py-10 animate-fade-up flex flex-col h-full justify-center">
                 
-                <header class="mb-4 md:mb-14">
+                <header class="mb-3 md:mb-14">
                     <h1 class="flex flex-col">
-                        <span class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
+                        <span class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
                             Pranesh
                         </span>
-                        <span class="text-lg sm:text-2xl md:text-5xl font-cursive text-gray-400 lowercase italic my-2 md:my-6 ml-1 opacity-60">
+                        <span class="text-base sm:text-2xl md:text-5xl font-cursive text-gray-400 lowercase italic my-1 md:my-6 ml-1 opacity-60">
                             weds
                         </span>
-                        <span class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
+                        <span class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
                             Shreeja
                         </span>
                     </h1>
                 </header>
 
-                <section class="mb-6 md:mb-20">
+                <section class="mb-4 md:mb-20">
                     <div class="space-y-1">
-                        <p class="text-lg md:text-3xl font-serif text-gray-800 tracking-wider font-bold">
+                        <p class="text-base md:text-3xl font-serif text-gray-800 tracking-wider font-bold">
                             FEBRUARY 14, 2026
                         </p>
-                        <p class="text-gray-400 text-[9px] md:text-xs uppercase tracking-[0.4em] font-medium">
+                        <p class="text-gray-400 text-[8px] md:text-xs uppercase tracking-[0.4em] font-medium">
                             KATHMANDU, NEPAL
                         </p>
                     </div>
                 </section>
 
-                <footer class="pt-6 border-t border-gray-100">
-                    <div id="countdown" class="flex space-x-6 md:space-x-10">
+                <footer class="pt-4 border-t border-gray-100">
+                    <div id="countdown" class="flex space-x-5 md:space-x-10">
                         <div class="flex flex-col items-center">
-                            <span id="days" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-1">DAYS</span>
+                            <span id="days" class="text-lg md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">DAYS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="hours" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-1">HOURS</span>
+                            <span id="hours" class="text-lg md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">HOURS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="minutes" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-1">MINS</span>
+                            <span id="minutes" class="text-lg md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">MINS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="seconds" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-1">SECS</span>
+                            <span id="seconds" class="text-lg md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">SECS</span>
                         </div>
                     </div>
                 </footer>
             </div>
         </div>
 
-        <!-- Interaction Section -->
-        <div class="w-full h-[52%] md:h-full md:w-[55%] lg:w-[60%] relative bg-gray-50 overflow-hidden">
-            <!-- Smooth Gradient Transitions -->
-            <div class="absolute inset-y-0 left-0 z-20 pointer-events-none hidden md:block bg-gradient-to-r from-white via-white/40 to-transparent w-32 lg:w-48"></div>
-            <div class="absolute inset-x-0 top-0 z-20 pointer-events-none md:hidden bg-gradient-to-b from-white via-white/40 to-transparent h-16"></div>
+        <!-- Interaction Section (Increased Coverage on Mobile) -->
+        <div class="w-full h-[65%] md:h-full md:w-[55%] lg:w-[60%] relative bg-gray-50 overflow-hidden">
+            
+            <!-- Softest Gradient Transitions -->
+            <!-- Desktop Gradient (Left to Right) -->
+            <div class="absolute inset-y-0 left-0 z-20 pointer-events-none hidden md:block bg-gradient-to-r from-white via-white/95 via-white/20 to-transparent w-64 lg:w-80"></div>
+            
+            <!-- Mobile Gradient (Top to Bottom) -->
+            <div class="absolute inset-x-0 top-0 z-20 pointer-events-none md:hidden bg-gradient-to-b from-white via-white/95 via-white/30 to-transparent h-40"></div>
 
             <div id="flashlight-container" class="flashlight-container">
                 <img src="DSC01262.JPG" alt="Wedding Grayscale" class="layer grayscale brightness-90 contrast-[1.1]" 
@@ -216,8 +220,8 @@
             const x = clientX - rect.left;
             const y = clientY - rect.top;
             
-            // Adjust flashlight size slightly for mobile
-            const radius = window.innerWidth < 768 ? 140 : 200;
+            const isMobile = window.innerWidth < 768;
+            const radius = isMobile ? 130 : 200;
             const mask = `radial-gradient(circle ${radius}px at ${x}px ${y}px, black 35%, transparent 100%)`;
             
             colorLayer.style.webkitMaskImage = mask;
