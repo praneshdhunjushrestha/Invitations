@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Wedding Invitation | Pranesh & Shreeja</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100%;
+            height: 100dvh;
             overflow: hidden;
             background-color: #ffffff;
             font-family: 'Lato', sans-serif;
@@ -149,7 +149,7 @@
         }
     </style>
 </head>
-<body class="flex flex-col md:flex-row select-none h-screen overflow-hidden">
+<body class="flex flex-col md:flex-row select-none h-[100dvh] overflow-hidden">
 
     <!-- Preloader -->
     <div id="loader">
@@ -167,10 +167,10 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex flex-col md:flex-row w-full h-full max-h-screen overflow-hidden">
+    <div class="flex flex-col md:flex-row w-full h-[100dvh] overflow-hidden justify-start">
         
         <!-- Information Section -->
-        <div class="w-full h-[32%] md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-start md:justify-center px-6 pt-10 md:px-10 lg:px-20 mobile-gradient z-30 md:border-r md:border-gray-50 relative">
+        <div class="w-full h-[32%] flex-shrink-0 md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-start md:justify-center px-6 pt-10 md:px-10 lg:px-20 mobile-gradient z-30 md:border-r md:border-gray-50 relative">
             <div class="max-w-md mx-auto animate-fade-up flex flex-col h-full justify-start md:justify-center items-center text-center">
                 
                 <header class="mb-3 md:mb-14">
@@ -199,7 +199,6 @@
                     <section class="mb-3 md:mb-16 w-full">
                         <div class="space-y-1 md:space-y-2 flex flex-col items-center">
                             <p id="event-date" class="text-lg md:text-3xl font-serif text-gray-800 tracking-wider font-bold">FEBRUARY 08, 2026</p>
-                            <!-- Fixed height to prevent layout jump: approx 2 lines worth of height -->
                             <div class="min-h-[2.5rem] md:min-h-[3rem] flex items-start justify-center text-center">
                                 <p id="event-location" class="text-gray-400 text-[9px] md:text-xs uppercase tracking-[0.4em] font-medium leading-relaxed max-w-[260px] md:max-w-none">SA:SA BANQUET, NAYA BAZAR</p>
                             </div>
@@ -231,7 +230,7 @@
         </div>
 
         <!-- Interaction Section -->
-        <div class="w-full h-[68%] md:h-full md:w-[55%] lg:w-[60%] relative bg-white overflow-hidden">
+        <div class="w-full flex-grow md:h-full md:w-[55%] lg:w-[60%] relative bg-white overflow-hidden">
             <div id="flashlight-container" class="flashlight-container">
                 <img src="DSC01262.JPG" alt="Wedding Grayscale" class="layer grayscale brightness-90 contrast-[1.1]" 
                      onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000'">
