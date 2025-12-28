@@ -3,11 +3,10 @@ import React, { useState, useRef } from 'react';
 
 interface FlashlightHeroProps {
   imageUrl: string;
-  instruction?: string;
 }
 
 const FlashlightHero: React.FC<FlashlightHeroProps> = ({ imageUrl }) => {
-  const [position, setPosition] = useState({ x: -1000, y: -1000 });
+  const [position, setPosition] = useState({ x: -2000, y: -2000 });
   const [isHovering, setIsHovering] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +37,7 @@ const FlashlightHero: React.FC<FlashlightHeroProps> = ({ imageUrl }) => {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-full overflow-hidden cursor-none group bg-gray-100"
+      className="relative w-full h-full overflow-hidden cursor-none group bg-gray-50"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
@@ -46,41 +45,41 @@ const FlashlightHero: React.FC<FlashlightHeroProps> = ({ imageUrl }) => {
       onTouchStart={handleTouchStart}
       onTouchEnd={() => setIsHovering(false)}
     >
-      {/* Base Layer: Black & White */}
+      {/* Base Layer: Nostalgic Monochrome */}
       <img 
         src={imageUrl} 
-        alt="Wedding Story" 
-        className="absolute inset-0 w-full h-full object-cover grayscale brightness-90 contrast-110 transition-opacity duration-1000"
+        alt="Wedding Story B&W" 
+        className="absolute inset-0 w-full h-full object-cover grayscale brightness-[0.85] contrast-[1.1] transition-opacity duration-1000"
         draggable={false}
         onError={(e) => {
           (e.currentTarget as HTMLImageElement).src = "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2069";
         }}
       />
 
-      {/* Top Layer: Color (Masked by Radial Gradient) */}
+      {/* Top Layer: Vivid Color (Masked by Interactive Radial Gradient) */}
       <img 
         src={imageUrl} 
         alt="Wedding Story Color" 
         className="absolute inset-0 w-full h-full object-cover z-10"
         draggable={false}
         style={{
-          WebkitMaskImage: `radial-gradient(circle 220px at ${position.x}px ${position.y}px, black 30%, transparent 100%)`,
-          maskImage: `radial-gradient(circle 220px at ${position.x}px ${position.y}px, black 30%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(circle 240px at ${position.x}px ${position.y}px, black 35%, transparent 100%)`,
+          maskImage: `radial-gradient(circle 240px at ${position.x}px ${position.y}px, black 35%, transparent 100%)`,
         }}
         onError={(e) => {
           (e.currentTarget as HTMLImageElement).src = "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2069";
         }}
       />
 
-      {/* Elegant Cursor Ring */}
+      {/* Subtle Cursor Ring */}
       <div 
-        className="absolute pointer-events-none z-40 border-2 border-white/40 rounded-full w-12 h-12 -ml-6 -mt-6 transition-transform duration-75"
+        className="absolute pointer-events-none z-40 border-[1px] border-white/30 rounded-full w-16 h-16 -ml-8 -mt-8 transition-transform duration-150 ease-out"
         style={{ 
           left: position.x, 
           top: position.y,
           opacity: isHovering ? 1 : 0,
           mixBlendMode: 'difference',
-          transform: `scale(${isHovering ? 1 : 0.2})`
+          transform: `scale(${isHovering ? 1 : 0.4})`
         }}
       />
     </div>
