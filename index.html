@@ -69,7 +69,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            /* Mask transition - shifted up for the new split */
+            /* Sophisticated mask for mobile overlap - starts higher */
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.02) 5%, black 25%);
             mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.02) 5%, black 25%);
         }
@@ -87,7 +87,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 20%; /* Prioritize the upper part of the photo on mobile */
+            object-position: center 20%;
             pointer-events: none;
         }
 
@@ -124,6 +124,15 @@
         .animate-fade-up {
             animation: fadeIn 1s ease-out forwards;
         }
+        
+        .mobile-gradient {
+            background: linear-gradient(to bottom, white 0%, white 35%, rgba(255,255,255,0) 100%);
+        }
+        @media (min-width: 768px) {
+            .mobile-gradient {
+                background: white;
+            }
+        }
     </style>
 </head>
 <body class="flex flex-col md:flex-row select-none h-screen overflow-hidden">
@@ -131,19 +140,11 @@
     <!-- Preloader -->
     <div id="loader">
         <div class="flex flex-col items-center">
-            <!-- Signature SVG Loader (P [Heart] S) -->
             <div class="signature-container mb-8">
                 <svg width="240" height="120" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Letter P (Elegant Serif) -->
                     <path class="signature-path" d="M45 75V25M45 25C65 25 75 30 75 42C75 55 65 60 45 60" stroke="#d4af37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    
-                    <!-- Elegant Heart Symbol (Replacing &) -->
                     <path class="signature-path" d="M100 55C100 55 95 48 90 48C84 48 82 53 82 58C82 66 100 78 100 78C100 78 118 66 118 58C118 53 116 48 110 48C105 48 100 55 100 55Z" stroke="#d4af37" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="animation-delay: 0.9s;"/>
-                    
-                    <!-- Letter S (Graceful Flow) -->
                     <path class="signature-path" d="M165 30C155 22 135 25 135 45C135 60 165 65 165 80C165 95 145 100 135 90" stroke="#d4af37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="animation-delay: 1.8s;"/>
-                    
-                    <!-- Swash / Underline -->
                     <path class="signature-path" d="M35 85C60 82 140 82 175 80" stroke="#d4af37" stroke-width="1" stroke-opacity="0.4" stroke-linecap="round" style="animation-delay: 2.8s;"/>
                 </svg>
             </div>
@@ -154,19 +155,19 @@
     <!-- Main Content -->
     <div class="flex flex-col md:flex-row w-full h-full max-h-screen overflow-hidden">
         
-        <!-- Information Section (Minimalist header for mobile) -->
-        <div class="w-full h-[22%] md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-center px-6 md:px-16 lg:px-20 bg-white z-30 md:border-r md:border-gray-50 overflow-hidden relative">
-            <div class="max-w-md mx-auto md:mx-0 py-1 md:py-10 animate-fade-up flex flex-col h-full justify-center">
+        <!-- Information Section (Height increased to 32% to allow for deeper overlap/push-down) -->
+        <div class="w-full h-[32%] md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-start md:justify-center px-6 pt-12 md:px-16 lg:px-20 mobile-gradient z-30 md:border-r md:border-gray-50 relative">
+            <div class="max-w-md mx-auto md:mx-0 animate-fade-up flex flex-col h-full justify-start md:justify-center">
                 
                 <header class="mb-1 md:mb-14">
                     <h1 class="flex flex-col">
-                        <span class="text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
+                        <span class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
                             Pranesh
                         </span>
-                        <span class="text-[10px] sm:text-2xl md:text-5xl font-cursive text-gray-400 lowercase italic my-0 md:my-6 ml-1 opacity-60">
+                        <span class="text-[10px] sm:text-2xl md:text-5xl font-cursive text-gray-400 lowercase italic my-0.5 md:my-6 ml-1 opacity-60">
                             weds
                         </span>
-                        <span class="text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
+                        <span class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
                             Shreeja
                         </span>
                     </h1>
@@ -174,40 +175,40 @@
 
                 <section class="mb-1 md:mb-20">
                     <div class="space-y-0.5 md:space-y-1">
-                        <p class="text-[14px] md:text-3xl font-serif text-gray-800 tracking-wider font-bold">
+                        <p class="text-base md:text-3xl font-serif text-gray-800 tracking-wider font-bold">
                             FEBRUARY 14, 2026
                         </p>
-                        <p class="text-gray-400 text-[7px] md:text-xs uppercase tracking-[0.4em] font-medium">
+                        <p class="text-gray-400 text-[8px] md:text-xs uppercase tracking-[0.4em] font-medium">
                             KATHMANDU, NEPAL
                         </p>
                     </div>
                 </section>
 
-                <footer class="pt-1 md:pt-4 border-t border-gray-100">
-                    <div id="countdown" class="flex space-x-5 md:space-x-10">
+                <footer class="pt-1 md:pt-4 border-t border-gray-100/50">
+                    <div id="countdown" class="flex space-x-4 md:space-x-10">
                         <div class="flex flex-col items-center">
-                            <span id="days" class="text-sm md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[5px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">DAYS</span>
+                            <span id="days" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums leading-none">00</span>
+                            <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-0.5">DAYS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="hours" class="text-sm md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[5px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">HOURS</span>
+                            <span id="hours" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums leading-none">00</span>
+                            <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-0.5">HRS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="minutes" class="text-sm md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[5px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">MINS</span>
+                            <span id="minutes" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums leading-none">00</span>
+                            <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-0.5">MINS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="seconds" class="text-sm md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[5px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">SECS</span>
+                            <span id="seconds" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums leading-none">00</span>
+                            <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-0.5">SECS</span>
                         </div>
                     </div>
                 </footer>
             </div>
         </div>
 
-        <!-- Interaction Section (Expanded mobile canvas) -->
-        <div class="w-full h-[78%] md:h-full md:w-[55%] lg:w-[60%] relative bg-white overflow-hidden">
+        <!-- Interaction Section (Remaining height on mobile) -->
+        <div class="w-full h-[68%] md:h-full md:w-[55%] lg:w-[60%] relative bg-white overflow-hidden">
             <div id="flashlight-container" class="flashlight-container">
                 <img src="DSC01262.JPG" alt="Wedding Grayscale" class="layer grayscale brightness-90 contrast-[1.1]" 
                      onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000'">
@@ -224,7 +225,6 @@
         // 1. Loader Logic
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
-            // Give enough time for the full drawing sequence
             setTimeout(() => {
                 loader.style.opacity = '0';
                 setTimeout(() => loader.style.display = 'none', 800);
@@ -241,10 +241,16 @@
             const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById('days').innerText = d.toString().padStart(2, '0');
-            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+            
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minsEl = document.getElementById('minutes');
+            const secsEl = document.getElementById('seconds');
+            
+            if (daysEl) daysEl.innerText = d.toString().padStart(2, '0');
+            if (hoursEl) hoursEl.innerText = h.toString().padStart(2, '0');
+            if (minsEl) minsEl.innerText = m.toString().padStart(2, '0');
+            if (secsEl) secsEl.innerText = s.toString().padStart(2, '0');
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
@@ -258,12 +264,12 @@
             const rect = container.getBoundingClientRect();
             const clientX = e.clientX || (e.touches && e.touches[0].clientX);
             const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-            if (clientX === undefined) return;
+            if (clientX === undefined || clientY === undefined) return;
             const x = clientX - rect.left;
             const y = clientY - rect.top;
             
             const isMobile = window.innerWidth < 768;
-            const radius = isMobile ? 120 : 180;
+            const radius = isMobile ? 110 : 180;
             const mask = `radial-gradient(circle ${radius}px at ${x}px ${y}px, black 35%, transparent 100%)`;
             
             colorLayer.style.webkitMaskImage = mask;
@@ -279,7 +285,7 @@
             moveFlashlight(e);
         });
         container.addEventListener('touchmove', (e) => {
-            e.preventDefault();
+            if (e.cancelable) e.preventDefault();
             moveFlashlight(e);
         }, { passive: false });
         container.addEventListener('touchend', () => {
