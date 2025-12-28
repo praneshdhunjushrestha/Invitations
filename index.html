@@ -41,12 +41,44 @@
             transition: opacity 0.8s ease-out;
         }
 
+        /* Signature Handwriting Animation */
+        .signature-path {
+            stroke-dasharray: 800;
+            stroke-dashoffset: 800;
+            animation: drawSignature 3.5s cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
+            filter: drop-shadow(0px 0px 1px rgba(212, 175, 55, 0.2));
+        }
+
+        @keyframes drawSignature {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes pulseSignature {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.01); }
+        }
+        .signature-container {
+            animation: pulseSignature 3s ease-in-out infinite;
+            animation-delay: 3.2s;
+        }
+
         .flashlight-container {
             cursor: none;
             position: relative;
             width: 100%;
             height: 100%;
-            background: #f3f4f6;
+            /* Aggressive Mask Transition */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 15%, black 45%);
+            mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 15%, black 45%);
+        }
+
+        @media (min-width: 768px) {
+            .flashlight-container {
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 15%, black 45%);
+                mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 15%, black 45%);
+            }
         }
 
         .layer {
@@ -60,6 +92,7 @@
 
         .color-layer {
             z-index: 10;
+            /* Flashlight reveal mask */
             -webkit-mask-image: radial-gradient(circle 0px at -500px -500px, black 30%, transparent 100%);
             mask-image: radial-gradient(circle 0px at -500px -500px, black 30%, transparent 100%);
         }
@@ -97,24 +130,39 @@
     <!-- Preloader -->
     <div id="loader">
         <div class="flex flex-col items-center">
-            <div class="w-10 h-10 border-2 border-gray-100 border-t-[#d4af37] rounded-full animate-spin mb-4"></div>
-            <p class="text-[9px] uppercase tracking-[0.3em] text-gray-400 font-serif italic">You're Invited...</p>
+            <!-- Signature SVG Loader (P [Heart] S) -->
+            <div class="signature-container mb-8">
+                <svg width="240" height="120" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Letter P (Elegant Serif) -->
+                    <path class="signature-path" d="M45 75V25M45 25C65 25 75 30 75 42C75 55 65 60 45 60" stroke="#d4af37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    
+                    <!-- Elegant Heart Symbol (Replacing &) -->
+                    <path class="signature-path" d="M100 55C100 55 95 48 90 48C84 48 82 53 82 58C82 66 100 78 100 78C100 78 118 66 118 58C118 53 116 48 110 48C105 48 100 55 100 55Z" stroke="#d4af37" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="animation-delay: 0.9s;"/>
+                    
+                    <!-- Letter S (Graceful Flow) -->
+                    <path class="signature-path" d="M165 30C155 22 135 25 135 45C135 60 165 65 165 80C165 95 145 100 135 90" stroke="#d4af37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="animation-delay: 1.8s;"/>
+                    
+                    <!-- Swash / Underline -->
+                    <path class="signature-path" d="M35 85C60 82 140 82 175 80" stroke="#d4af37" stroke-width="1" stroke-opacity="0.4" stroke-linecap="round" style="animation-delay: 2.8s;"/>
+                </svg>
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.5em] text-[#d4af37] font-serif font-light">Celebrating Love</p>
         </div>
     </div>
 
     <!-- Main Content -->
     <div class="flex flex-col md:flex-row w-full h-full max-h-screen overflow-hidden">
         
-        <!-- Information Section (Reduced Height on Mobile) -->
-        <div class="w-full h-[35%] md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-center px-6 md:px-16 lg:px-20 bg-white z-30 md:border-r md:border-gray-50 overflow-hidden relative">
-            <div class="max-w-md mx-auto md:mx-0 py-2 md:py-10 animate-fade-up flex flex-col h-full justify-center">
+        <!-- Information Section (Balanced mobile height) -->
+        <div class="w-full h-[32%] md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-center px-6 md:px-16 lg:px-20 bg-white z-30 md:border-r md:border-gray-50 overflow-hidden relative">
+            <div class="max-w-md mx-auto md:mx-0 py-4 md:py-10 animate-fade-up flex flex-col h-full justify-center">
                 
-                <header class="mb-3 md:mb-14">
+                <header class="mb-2 md:mb-14">
                     <h1 class="flex flex-col">
                         <span class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
                             Pranesh
                         </span>
-                        <span class="text-base sm:text-2xl md:text-5xl font-cursive text-gray-400 lowercase italic my-1 md:my-6 ml-1 opacity-60">
+                        <span class="text-xs sm:text-2xl md:text-5xl font-cursive text-gray-400 lowercase italic my-1 md:my-6 ml-1 opacity-60">
                             weds
                         </span>
                         <span class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
@@ -124,8 +172,8 @@
                 </header>
 
                 <section class="mb-4 md:mb-20">
-                    <div class="space-y-1">
-                        <p class="text-base md:text-3xl font-serif text-gray-800 tracking-wider font-bold">
+                    <div class="space-y-1 md:space-y-1">
+                        <p class="text-[16px] md:text-3xl font-serif text-gray-800 tracking-wider font-bold">
                             FEBRUARY 14, 2026
                         </p>
                         <p class="text-gray-400 text-[8px] md:text-xs uppercase tracking-[0.4em] font-medium">
@@ -134,22 +182,22 @@
                     </div>
                 </section>
 
-                <footer class="pt-4 border-t border-gray-100">
+                <footer class="pt-3 md:pt-4 border-t border-gray-100">
                     <div id="countdown" class="flex space-x-5 md:space-x-10">
                         <div class="flex flex-col items-center">
-                            <span id="days" class="text-lg md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span id="days" class="text-base md:text-4xl font-light text-gray-800 tabular-nums">00</span>
                             <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">DAYS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="hours" class="text-lg md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span id="hours" class="text-base md:text-4xl font-light text-gray-800 tabular-nums">00</span>
                             <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">HOURS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="minutes" class="text-lg md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span id="minutes" class="text-base md:text-4xl font-light text-gray-800 tabular-nums">00</span>
                             <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">MINS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="seconds" class="text-lg md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span id="seconds" class="text-base md:text-4xl font-light text-gray-800 tabular-nums">00</span>
                             <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">SECS</span>
                         </div>
                     </div>
@@ -157,16 +205,8 @@
             </div>
         </div>
 
-        <!-- Interaction Section (Increased Coverage on Mobile) -->
-        <div class="w-full h-[65%] md:h-full md:w-[55%] lg:w-[60%] relative bg-gray-50 overflow-hidden">
-            
-            <!-- Softest Gradient Transitions -->
-            <!-- Desktop Gradient (Left to Right) -->
-            <div class="absolute inset-y-0 left-0 z-20 pointer-events-none hidden md:block bg-gradient-to-r from-white via-white/95 via-white/20 to-transparent w-64 lg:w-80"></div>
-            
-            <!-- Mobile Gradient (Top to Bottom) -->
-            <div class="absolute inset-x-0 top-0 z-20 pointer-events-none md:hidden bg-gradient-to-b from-white via-white/95 via-white/30 to-transparent h-40"></div>
-
+        <!-- Interaction Section (Balanced mobile height) -->
+        <div class="w-full h-[68%] md:h-full md:w-[55%] lg:w-[60%] relative bg-white overflow-hidden">
             <div id="flashlight-container" class="flashlight-container">
                 <img src="DSC01262.JPG" alt="Wedding Grayscale" class="layer grayscale brightness-90 contrast-[1.1]" 
                      onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000'">
@@ -183,10 +223,11 @@
         // 1. Loader Logic
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
+            // Give enough time for the full drawing sequence
             setTimeout(() => {
                 loader.style.opacity = '0';
                 setTimeout(() => loader.style.display = 'none', 800);
-            }, 1000);
+            }, 4500);
         });
 
         // 2. Countdown Logic
@@ -221,7 +262,7 @@
             const y = clientY - rect.top;
             
             const isMobile = window.innerWidth < 768;
-            const radius = isMobile ? 130 : 200;
+            const radius = isMobile ? 120 : 180;
             const mask = `radial-gradient(circle ${radius}px at ${x}px ${y}px, black 35%, transparent 100%)`;
             
             colorLayer.style.webkitMaskImage = mask;
