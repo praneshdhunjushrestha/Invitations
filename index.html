@@ -69,9 +69,9 @@
             position: relative;
             width: 100%;
             height: 100%;
-            /* Aggressive Mask Transition */
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 15%, black 45%);
-            mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 15%, black 45%);
+            /* Mask transition - shifted up for the new split */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.02) 5%, black 25%);
+            mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.02) 5%, black 25%);
         }
 
         @media (min-width: 768px) {
@@ -87,6 +87,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center 20%; /* Prioritize the upper part of the photo on mobile */
             pointer-events: none;
         }
 
@@ -153,60 +154,60 @@
     <!-- Main Content -->
     <div class="flex flex-col md:flex-row w-full h-full max-h-screen overflow-hidden">
         
-        <!-- Information Section (Balanced mobile height) -->
-        <div class="w-full h-[32%] md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-center px-6 md:px-16 lg:px-20 bg-white z-30 md:border-r md:border-gray-50 overflow-hidden relative">
-            <div class="max-w-md mx-auto md:mx-0 py-4 md:py-10 animate-fade-up flex flex-col h-full justify-center">
+        <!-- Information Section (Minimalist header for mobile) -->
+        <div class="w-full h-[22%] md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-center px-6 md:px-16 lg:px-20 bg-white z-30 md:border-r md:border-gray-50 overflow-hidden relative">
+            <div class="max-w-md mx-auto md:mx-0 py-1 md:py-10 animate-fade-up flex flex-col h-full justify-center">
                 
-                <header class="mb-2 md:mb-14">
+                <header class="mb-1 md:mb-14">
                     <h1 class="flex flex-col">
-                        <span class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
+                        <span class="text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
                             Pranesh
                         </span>
-                        <span class="text-xs sm:text-2xl md:text-5xl font-cursive text-gray-400 lowercase italic my-1 md:my-6 ml-1 opacity-60">
+                        <span class="text-[10px] sm:text-2xl md:text-5xl font-cursive text-gray-400 lowercase italic my-0 md:my-6 ml-1 opacity-60">
                             weds
                         </span>
-                        <span class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
+                        <span class="text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">
                             Shreeja
                         </span>
                     </h1>
                 </header>
 
-                <section class="mb-4 md:mb-20">
-                    <div class="space-y-1 md:space-y-1">
-                        <p class="text-[16px] md:text-3xl font-serif text-gray-800 tracking-wider font-bold">
+                <section class="mb-1 md:mb-20">
+                    <div class="space-y-0.5 md:space-y-1">
+                        <p class="text-[14px] md:text-3xl font-serif text-gray-800 tracking-wider font-bold">
                             FEBRUARY 14, 2026
                         </p>
-                        <p class="text-gray-400 text-[8px] md:text-xs uppercase tracking-[0.4em] font-medium">
+                        <p class="text-gray-400 text-[7px] md:text-xs uppercase tracking-[0.4em] font-medium">
                             KATHMANDU, NEPAL
                         </p>
                     </div>
                 </section>
 
-                <footer class="pt-3 md:pt-4 border-t border-gray-100">
+                <footer class="pt-1 md:pt-4 border-t border-gray-100">
                     <div id="countdown" class="flex space-x-5 md:space-x-10">
                         <div class="flex flex-col items-center">
-                            <span id="days" class="text-base md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">DAYS</span>
+                            <span id="days" class="text-sm md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span class="text-[5px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">DAYS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="hours" class="text-base md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">HOURS</span>
+                            <span id="hours" class="text-sm md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span class="text-[5px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">HOURS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="minutes" class="text-base md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">MINS</span>
+                            <span id="minutes" class="text-sm md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span class="text-[5px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">MINS</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span id="seconds" class="text-base md:text-4xl font-light text-gray-800 tabular-nums">00</span>
-                            <span class="text-[6px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">SECS</span>
+                            <span id="seconds" class="text-sm md:text-4xl font-light text-gray-800 tabular-nums">00</span>
+                            <span class="text-[5px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300">SECS</span>
                         </div>
                     </div>
                 </footer>
             </div>
         </div>
 
-        <!-- Interaction Section (Balanced mobile height) -->
-        <div class="w-full h-[68%] md:h-full md:w-[55%] lg:w-[60%] relative bg-white overflow-hidden">
+        <!-- Interaction Section (Expanded mobile canvas) -->
+        <div class="w-full h-[78%] md:h-full md:w-[55%] lg:w-[60%] relative bg-white overflow-hidden">
             <div id="flashlight-container" class="flashlight-container">
                 <img src="DSC01262.JPG" alt="Wedding Grayscale" class="layer grayscale brightness-90 contrast-[1.1]" 
                      onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000'">
