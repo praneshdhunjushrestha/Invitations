@@ -36,7 +36,7 @@ const App: React.FC = () => {
                 weds
               </span>
               <span className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase transition-colors duration-500">
-                Shreeja
+                Dr.Shreeja
               </span>
             </h1>
           </header>
