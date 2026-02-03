@@ -180,7 +180,7 @@
                         <span class="text-5xl font-cursive text-gray-400 lowercase italic my-6 ml-1 opacity-60">weds</span>
                         <span class="text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">dr.Shreeja</span>
                     </h1>
-                    <!-- Mobile Layout: Single Line (Smaller text sizes: text-2xl and text-lg) -->
+                    <!-- Mobile Layout: Single Line -->
                     <h1 class="flex md:hidden items-baseline space-x-2 justify-center">
                         <span class="text-2xl font-bold text-[#d4af37] tracking-tighter uppercase leading-none">Pranesh</span>
                         <span class="text-lg font-cursive text-gray-400 opacity-60">weds</span>
@@ -196,9 +196,10 @@
                     </div>
 
                     <section class="mb-3 md:mb-16 w-full">
-                        <div class="space-y-1 md:space-y-2 flex flex-col items-center">
+                        <div class="space-y-1 md:space-y-1.5 flex flex-col items-center">
                             <p id="event-date" class="text-lg md:text-3xl font-serif text-gray-800 tracking-wider font-bold">FEBRUARY 10, 2026</p>
-                            <div class="min-h-[2.5rem] md:min-h-[3rem] flex items-start justify-center text-center">
+                            <p id="event-time" class="text-[10px] md:text-sm font-serif text-gray-500 tracking-[0.3em] uppercase font-light">10 AM SHARP</p>
+                            <div class="min-h-[2.5rem] md:min-h-[3rem] flex items-start justify-center text-center pt-1">
                                 <p id="event-location" class="text-gray-400 text-[9px] md:text-xs uppercase tracking-[0.4em] font-medium leading-relaxed max-w-[260px] md:max-w-none">ARANYA BOUTIQUE HOTEL, NAGPOKHARI</p>
                             </div>
                         </div>
@@ -258,12 +259,14 @@
                 name: "Wedding",
                 date: "Feb 10, 2026 10:00:00",
                 displayDate: "FEBRUARY 10, 2026",
+                time: "10 AM SHARP",
                 location: "ARANYA BOUTIQUE HOTEL, NAGPOKHARI"
             },
             {
                 name: "Reception (Groom)",
                 date: "Feb 14, 2026 18:00:00",
                 displayDate: "FEBRUARY 14, 2026",
+                time: "5 PM ONWARDS",
                 location: "THAPAGAUN BANQUET, NEW BANESHWOR"
             }
         ];
@@ -282,6 +285,7 @@
                 
                 // Update UI Text
                 document.getElementById('event-date').innerText = events[index].displayDate;
+                document.getElementById('event-time').innerText = events[index].time;
                 document.getElementById('event-location').innerText = events[index].location;
 
                 // Update Nav Buttons
