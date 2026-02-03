@@ -1,20 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Wedding Invitation | Pranesh & Shreeja</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --gold: #d4af37;
+        }
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100%;
+            height: 100dvh;
             overflow: hidden;
             background-color: #ffffff;
             font-family: 'Lato', sans-serif;
@@ -27,19 +29,336 @@
             font-family: 'Playfair Display', serif;
             font-style: italic;
         }
+        
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #ffffff;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease-out;
+        }
+
+        .signature-path {
+            stroke-dasharray: 800;
+            stroke-dashoffset: 800;
+            animation: drawSignature 3.5s cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
+            filter: drop-shadow(0px 0px 1px rgba(212, 175, 55, 0.2));
+        }
+
+        @keyframes drawSignature {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes pulseSignature {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.01); }
+        }
+        .signature-container {
+            animation: pulseSignature 3s ease-in-out infinite;
+            animation-delay: 3.2s;
+        }
+
+        .flashlight-container {
+            cursor: none;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.02) 5%, black 25%);
+            mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.02) 5%, black 25%);
+        }
+
+        @media (min-width: 768px) {
+            .flashlight-container {
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 15%, black 45%);
+                mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 15%, black 45%);
+            }
+        }
+
+        .layer {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            pointer-events: none;
+        }
+
+        .color-layer {
+            z-index: 10;
+            -webkit-mask-image: radial-gradient(circle 0px at -500px -500px, black 30%, transparent 100%);
+            mask-image: radial-gradient(circle 0px at -500px -500px, black 30%, transparent 100%);
+        }
+
+        .cursor-ring {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 25;
+            mix-blend-mode: difference;
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 0;
+            transition: transform 0.2s ease-out, opacity 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .mobile-gradient {
+            background: linear-gradient(to bottom, white 0%, white 45%, rgba(255,255,255,0) 100%);
+        }
+        @media (min-width: 768px) {
+            .mobile-gradient { background: white; }
+        }
+
+        /* Event Switcher Transitions */
+        .event-content {
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-out;
+        }
+        .event-content.fade-out {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+        
+        .nav-dot {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #9ca3af; /* text-gray-400 */
+        }
+        .nav-dot.active {
+            color: var(--gold);
+            transform: scale(1.05);
+        }
+        .nav-dot.active::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: var(--gold);
+            margin-top: 2px;
+        }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
-  }
-}
-</script>
 </head>
-<body>
-    <div id="root"></div>
+<body class="flex flex-col md:flex-row select-none h-[100dvh] overflow-hidden">
+
+    <!-- Preloader -->
+    <div id="loader">
+        <div class="flex flex-col items-center">
+            <div class="signature-container mb-8">
+                <svg width="240" height="120" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="signature-path" d="M45 75V25M45 25C65 25 75 30 75 42C75 55 65 60 45 60" stroke="#d4af37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path class="signature-path" d="M100 55C100 55 95 48 90 48C84 48 82 53 82 58C82 66 100 78 100 78C100 78 118 66 118 58C118 53 116 48 110 48C105 48 100 55 100 55Z" stroke="#d4af37" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="animation-delay: 0.9s;"/>
+                    <path class="signature-path" d="M165 30C155 22 135 25 135 45C135 60 165 65 165 80C165 95 145 100 135 90" stroke="#d4af37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="animation-delay: 1.8s;"/>
+                    <path class="signature-path" d="M35 85C60 82 140 82 175 80" stroke="#d4af37" stroke-width="1" stroke-opacity="0.4" stroke-linecap="round" style="animation-delay: 2.8s;"/>
+                </svg>
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.5em] text-[#d4af37] font-serif font-light">Celebrating Love</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex flex-col md:flex-row w-full h-[100dvh] overflow-hidden justify-start">
+        
+        <!-- Information Section -->
+        <div class="w-full h-[32%] flex-shrink-0 md:h-full md:w-[45%] lg:w-[40%] flex flex-col justify-start md:justify-center px-6 pt-10 md:px-10 lg:px-20 mobile-gradient z-30 md:border-r md:border-gray-50 relative">
+            <div class="max-w-md mx-auto animate-fade-up flex flex-col h-full justify-start md:justify-center items-center text-center">
+                
+                <header class="mb-3 md:mb-14">
+                    <!-- Desktop Layout: Multiline -->
+                    <h1 class="hidden md:flex flex-col items-center">
+                        <span class="text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">Pranesh</span>
+                        <span class="text-5xl font-cursive text-gray-400 lowercase italic my-6 ml-1 opacity-60">weds</span>
+                        <span class="text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">Shreeja</span>
+                    </h1>
+                    <!-- Mobile Layout: Single Line (Smaller text sizes: text-2xl and text-lg) -->
+                    <h1 class="flex md:hidden items-baseline space-x-2 justify-center">
+                        <span class="text-2xl font-bold text-[#d4af37] tracking-tighter uppercase leading-none">Pranesh</span>
+                        <span class="text-lg font-cursive text-gray-400 opacity-60">weds</span>
+                        <span class="text-2xl font-bold text-[#d4af37] tracking-tighter uppercase leading-none">Shreeja</span>
+                    </h1>
+                </header>
+
+                <!-- Dynamic Event Section -->
+                <div id="event-container" class="event-content w-full flex flex-col items-center">
+                    <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 mb-3 md:mb-8">
+                        <button onclick="switchEvent(0)" class="nav-dot text-[9px] md:text-[10px] font-bold tracking-widest uppercase active whitespace-nowrap" id="btn-0">Wedding</button>
+                        <button onclick="switchEvent(1)" class="nav-dot text-[9px] md:text-[10px] font-bold tracking-widest uppercase whitespace-nowrap" id="btn-1">Reception (G)</button>
+                    </div>
+
+                    <section class="mb-3 md:mb-16 w-full">
+                        <div class="space-y-1 md:space-y-2 flex flex-col items-center">
+                            <p id="event-date" class="text-lg md:text-3xl font-serif text-gray-800 tracking-wider font-bold">FEBRUARY 10, 2026</p>
+                            <div class="min-h-[2.5rem] md:min-h-[3rem] flex items-start justify-center text-center">
+                                <p id="event-location" class="text-gray-400 text-[9px] md:text-xs uppercase tracking-[0.4em] font-medium leading-relaxed max-w-[260px] md:max-w-none">ARANYA BOUTIQUE HOTEL, NAGPOKHARI</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <footer class="pt-2 md:pt-4 border-t border-gray-100/50 w-full">
+                    <div id="countdown" class="flex justify-center space-x-4 md:space-x-10">
+                        <div class="flex flex-col items-center">
+                            <span id="days" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums leading-none">00</span>
+                            <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-1">DAYS</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span id="hours" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums leading-none">00</span>
+                            <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-1">HRS</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span id="minutes" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums leading-none">00</span>
+                            <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-1">MINS</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span id="seconds" class="text-xl md:text-4xl font-light text-gray-800 tabular-nums leading-none">00</span>
+                            <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-1">SECS</span>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Interaction Section -->
+        <div class="w-full flex-grow md:h-full md:w-[55%] lg:w-[60%] relative bg-white overflow-hidden">
+            <div id="flashlight-container" class="flashlight-container">
+                <img src="DSC01262.JPG" alt="Wedding Grayscale" class="layer grayscale brightness-90 contrast-[1.1]" 
+                     onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000'">
+                
+                <img id="color-layer" src="DSC01262.JPG" alt="Wedding Color" class="layer color-layer" 
+                     onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000'">
+                
+                <div id="cursor-ring" class="cursor-ring"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Loader Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 800);
+            }, 4500);
+        });
+
+        // 2. Data & Event Logic
+        const events = [
+            {
+                name: "Wedding",
+                date: "Feb 10, 2026 10:00:00",
+                displayDate: "FEBRUARY 10, 2026",
+                location: "ARANYA BOUTIQUE HOTEL, NAGPOKHARI"
+            },
+            {
+                name: "Reception (G)",
+                date: "Feb 14, 2026 18:00:00",
+                displayDate: "FEBRUARY 14, 2026",
+                location: "THAPAGAUN BANQUET, NEW BANESHWOR"
+            }
+        ];
+
+        let currentEventIndex = 0;
+        let countdownInterval;
+
+        function switchEvent(index) {
+            if (index === currentEventIndex) return;
+            
+            const container = document.getElementById('event-container');
+            container.classList.add('fade-out');
+
+            setTimeout(() => {
+                currentEventIndex = index;
+                
+                // Update UI Text
+                document.getElementById('event-date').innerText = events[index].displayDate;
+                document.getElementById('event-location').innerText = events[index].location;
+
+                // Update Nav Buttons
+                document.querySelectorAll('.nav-dot').forEach(dot => dot.classList.remove('active'));
+                const activeBtn = document.getElementById(`btn-${index}`);
+                if (activeBtn) activeBtn.classList.add('active');
+
+                // Restart Countdown
+                clearInterval(countdownInterval);
+                startCountdown(events[index].date);
+
+                container.classList.remove('fade-out');
+            }, 400);
+        }
+
+        // 3. Countdown Logic
+        function startCountdown(targetStr) {
+            const targetDate = new Date(targetStr).getTime();
+            
+            function update() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                
+                const d = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+                const h = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+                const m = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+                const s = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
+                
+                document.getElementById('days').innerText = d.toString().padStart(2, '0');
+                document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+            }
+
+            update();
+            countdownInterval = setInterval(update, 1000);
+        }
+
+        // Start countdown for the first event in the updated list
+        startCountdown(events[0].date);
+
+        // 4. Flashlight Logic
+        const container = document.getElementById('flashlight-container');
+        const colorLayer = document.getElementById('color-layer');
+        const cursorRing = document.getElementById('cursor-ring');
+
+        function moveFlashlight(e) {
+            const rect = container.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            if (clientX === undefined || clientY === undefined) return;
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+            
+            const isMobile = window.innerWidth < 768;
+            const radius = isMobile ? 110 : 180;
+            const mask = `radial-gradient(circle ${radius}px at ${x}px ${y}px, black 35%, transparent 100%)`;
+            
+            colorLayer.style.webkitMaskImage = mask;
+            colorLayer.style.maskImage = mask;
+            cursorRing.style.left = x + 'px';
+            cursorRing.style.top = y + 'px';
+        }
+
+        container.addEventListener('mousemove', moveFlashlight);
+        container.addEventListener('touchstart', (e) => {
+            cursorRing.style.opacity = '1';
+            cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+            moveFlashlight(e);
+        });
+        container.addEventListener('touchmove', (e) => {
+            if (e.cancelable) e.preventDefault();
+            moveFlashlight(e);
+        }, { passive: false });
+        container.addEventListener('touchend', () => {
+            cursorRing.style.opacity = '0';
+        });
+    </script>
 </body>
 </html>
