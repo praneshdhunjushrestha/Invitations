@@ -178,7 +178,7 @@
                     <h1 class="hidden md:flex flex-col items-center">
                         <span class="text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">Pranesh</span>
                         <span class="text-5xl font-cursive text-gray-400 lowercase italic my-6 ml-1 opacity-60">weds</span>
-                        <span class="text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">Dr.Shreeja</span>
+                        <span class="text-7xl lg:text-8xl font-bold text-[#d4af37] leading-[0.85] tracking-tighter uppercase">dr.Shreeja</span>
                     </h1>
                     <!-- Mobile Layout: Single Line -->
                     <h1 class="flex md:hidden items-baseline space-x-2 justify-center">
@@ -191,16 +191,15 @@
                 <!-- Dynamic Event Section -->
                 <div id="event-container" class="event-content w-full flex flex-col items-center">
                     <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 mb-3 md:mb-8">
-                        <button onclick="switchEvent(0)" class="nav-dot text-[9px] md:text-[10px] font-bold tracking-widest uppercase active whitespace-nowrap" id="btn-0">Reception (B)</button>
-                        <button onclick="switchEvent(0)" class="nav-dot text-[9px] md:text-[10px] font-bold tracking-widest uppercase whitespace-nowrap" id="btn-1">Wedding</button>
-                        <button onclick="switchEvent(1)" class="nav-dot text-[9px] md:text-[10px] font-bold tracking-widest uppercase whitespace-nowrap" id="btn-2">Reception (G)</button>
+                        <button onclick="switchEvent(0)" class="nav-dot text-[9px] md:text-[10px] font-bold tracking-widest uppercase active whitespace-nowrap" id="btn-0">Wedding</button>
+                        <button onclick="switchEvent(1)" class="nav-dot text-[9px] md:text-[10px] font-bold tracking-widest uppercase whitespace-nowrap" id="btn-1">Reception (G)</button>
                     </div>
 
                     <section class="mb-3 md:mb-16 w-full">
                         <div class="space-y-1 md:space-y-2 flex flex-col items-center">
-                            <p id="event-date" class="text-lg md:text-3xl font-serif text-gray-800 tracking-wider font-bold">FEBRUARY 08, 2026</p>
+                            <p id="event-date" class="text-lg md:text-3xl font-serif text-gray-800 tracking-wider font-bold">FEBRUARY 10, 2026</p>
                             <div class="min-h-[2.5rem] md:min-h-[3rem] flex items-start justify-center text-center">
-                                <p id="event-location" class="text-gray-400 text-[9px] md:text-xs uppercase tracking-[0.4em] font-medium leading-relaxed max-w-[260px] md:max-w-none">SA:SA BANQUET, NAYA BAZAR</p>
+                                <p id="event-location" class="text-gray-400 text-[9px] md:text-xs uppercase tracking-[0.4em] font-medium leading-relaxed max-w-[260px] md:max-w-none">ARANYA BOUTIQUE HOTEL, NAGPOKHARI</p>
                             </div>
                         </div>
                     </section>
@@ -255,12 +254,6 @@
 
         // 2. Data & Event Logic
         const events = [
-             {
-                 name: "Reception (B)",
-                 date: "Feb 08, 2026 18:00:00",
-                 displayDate: "FEBRUARY 08, 2026",
-                 location: "SA:SA BANQUET, NAYA BAZAR"
-             },
             {
                 name: "Wedding",
                 date: "Feb 10, 2026 10:00:00",
@@ -268,7 +261,7 @@
                 location: "ARANYA BOUTIQUE HOTEL, NAGPOKHARI"
             },
             {
-                name: "Reception (Groom)",
+                name: "Reception (G)",
                 date: "Feb 14, 2026 18:00:00",
                 displayDate: "FEBRUARY 14, 2026",
                 location: "THAPAGAUN BANQUET, NEW BANESHWOR"
@@ -291,9 +284,10 @@
                 document.getElementById('event-date').innerText = events[index].displayDate;
                 document.getElementById('event-location').innerText = events[index].location;
 
-                // Update Nav Dots
+                // Update Nav Buttons
                 document.querySelectorAll('.nav-dot').forEach(dot => dot.classList.remove('active'));
-                document.getElementById(`btn-${index}`).classList.add('active');
+                const activeBtn = document.getElementById(`btn-${index}`);
+                if (activeBtn) activeBtn.classList.add('active');
 
                 // Restart Countdown
                 clearInterval(countdownInterval);
@@ -326,6 +320,7 @@
             countdownInterval = setInterval(update, 1000);
         }
 
+        // Start countdown for the first event in the updated list
         startCountdown(events[0].date);
 
         // 4. Flashlight Logic
